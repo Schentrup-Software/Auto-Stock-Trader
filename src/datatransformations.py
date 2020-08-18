@@ -1,4 +1,5 @@
 from sklearn.preprocessing import MinMaxScaler
+import numpy as np
 
 def normalize_data(price):
     scaler = MinMaxScaler(feature_range=(-1, 1))
