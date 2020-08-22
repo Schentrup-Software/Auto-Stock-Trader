@@ -1,4 +1,4 @@
-FROM pytorch:arm7l
+FROM joeyschentrup/pytorch:arm7l
 
 RUN python3 -m pip install alpaca-trade-api
 

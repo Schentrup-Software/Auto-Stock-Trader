@@ -1,10 +1,9 @@
 FROM arm32v7/ubuntu:18.04
-COPY bin/ /usr/bin/
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update;\
-    apt-get install -y libopenblas-dev libblas-dev m4 cmake cython python3-dev python3-yaml python3-setuptools python3-pip git g++ build-essential gfortran libssl-dev
+    apt-get install -y libopenblas-dev libblas-dev m4 cmake cython python3-dev python3-yaml python3-setuptools python3-pip git g++ build-essential gfortran libssl-dev libffi-dev
 RUN python3 -m pip install --upgrade pip
 
 # Long Running and needed for future package installs
