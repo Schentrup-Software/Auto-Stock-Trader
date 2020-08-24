@@ -1,16 +1,7 @@
-from sklearn.preprocessing import MinMaxScaler
 import numpy as np
 
-def normalize_data(price):
-    scaler = MinMaxScaler(feature_range=(-1, 1))
-    price['Close'] = scaler.fit_transform(price['Close'].values.reshape(-1,1))
-    return price
-
-def denomralize_data(price):
-    scaler = MinMaxScaler(feature_range=(-1, 1))
-    return scaler.inverse_transform(price.detach().numpy())
-
 def split_data(stock, lookback):
+    print("Spliting data...")
     data_raw = stock.to_numpy() # convert to numpy array
     data = []
     

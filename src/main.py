@@ -1,17 +1,20 @@
-from alpacaclient import get_closing_stock_prices
-from modelbuilder import build_GRU_model
-from datatransformations import normalize_data
-from datatransformations import denomralize_data
-from datatransformations import split_data
- 
-price = get_closing_stock_prices('AAPL')
-print(price)
-price = normalize_data(price)
-print(price)
-x_train, y_train, x_eval = split_data(price, 20)
+from datetime import date
 
-model = build_GRU_model(x_train, y_train)
+from predictor import predict_stock
+from stocksymbols import get_stock_symbols
+from alpacaclient import Alpaca
 
-x_eval = torch.from_numpy(x_eval).type(torch.Tensor)
+today = date.today()
+print("Starting todays run:", today)
 
-print(denomralize_data(model(x_eval)))
+stock_symbols = get_stock_symbols()
+alpaca = Alpaca()
+
+for stock_symbol in stock_symbols:
+    yesterdays_price, projected_price = predict_stock(stock_symbol, 1000)
+    print('Yesterdays price: ' + str(yesterdays_price))
+    print('Todays projected price: ' + str(projected_price))
+    if yesterdays_price < projected_price:
+        alpaca.ensure_position(stock_symbol)
+    else:
+        alpaca.ensure_no_position(stock_symbol)

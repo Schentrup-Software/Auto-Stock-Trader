@@ -19,6 +19,7 @@ class GRU(nn.Module):
         return out
 
 def build_GRU_model(x_train, y_train):
+    print("Building GRU model...")
     x_train = torch.from_numpy(x_train).type(torch.Tensor)
     y_train = torch.from_numpy(y_train).type(torch.Tensor)
 
@@ -34,6 +35,7 @@ def build_GRU_model(x_train, y_train):
 
     start_time = time.time()
 
+    print("Training model... (this may take a while)")
     for t in range(num_epochs):
         y_train_pred = model(x_train)
 
