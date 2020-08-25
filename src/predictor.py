@@ -21,6 +21,5 @@ def predict_stock(stock_symbol: str, days_to_look_back: int):
     print("Evaluating..")
     result = scaler.inverse_transform(model(x_eval).detach().numpy())
     result = result[-1, -1]
-    print("Projected stock price for " + stock_symbol + ": " + str(result))
     
     return yesterdays_price, result
