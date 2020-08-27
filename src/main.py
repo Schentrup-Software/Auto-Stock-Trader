@@ -15,7 +15,8 @@ for stock_symbol in stock_symbols:
         yesterdays_price, projected_price = predict_stock(stock_symbol, 1000)
         print('Yesterdays price: ' + str(yesterdays_price))
         print('Todays projected price: ' + str(projected_price))
-        if yesterdays_price < projected_price:
+        # Only buy or hold the stock if we think there will be at least a 1% increase in the price
+        if (yesterdays_price * 1.01) < projected_price:
             alpaca.ensure_position(stock_symbol)
         else:
             alpaca.ensure_no_position(stock_symbol)
